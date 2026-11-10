@@ -9,7 +9,22 @@ export default function Home(){
  async function refresh(){const r=await fetch('/api/letters',{cache:'no-store'});const d=await r.json();if(r.ok){setPublished(d.published);setLetters(d.letters||[]);}}
  useEffect(()=>{refresh();const t=setInterval(refresh,30000);return()=>clearInterval(t);},[]);
  async function submitLetter(e){e.preventDefault();if(!content.trim())return;setSending(true);setNotice('');const r=await fetch('/api/letters',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});const d=await r.json();setSending(false);if(r.ok){setContent('');setNotice('편지가 설탕 왕국에 안전하게 도착했어요. 공개되는 날 다시 만나요!');}else setNotice(d.error||'전송에 실패했어요.');}
- async function downloadNode(node,name){if(!node)return;try{const data=await toPng(node,{pixelRatio:2,cacheBust:true,backgroundColor:'#fff8ef'});const a=document.createElement('a');a.download=name+'.png';a.href=data;a.click();}catch{setNotice('이미지 저장에 실패했어요. 다시 시도해 주세요.');}}
+ async function downloadNode(node,name){if(!node)return;try{
+  if(document.fonts?.ready) await document.fonts.ready;
+  const images=Array.from(node.querySelectorAll('img'));
+  await Promise.all(images.map(img=>img.decode?.().catch(()=>undefined)));
+  const options={pixelRatio:2,cacheBust:true,backgroundColor:'#fff8ef'};
+  let blob=await (await import('html-to-image')).toBlob(node,options);
+  if(!blob){const data=await toPng(node,options);const response=await fetch(data);blob=await response.blob();}
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.download=name+'.png';
+  a.href=url;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.setTimeout(()=>URL.revokeObjectURL(url),1500);
+}catch(error){console.error('이미지 저장 오류:',error);setNotice('이미지 저장에 실패했어요. 페이지를 새로고침한 뒤 다시 시도해 주세요.');}}
  async function login(e){e.preventDefault();const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});if(r.ok){setAdmin(true);setPassword('');loadAdmin();}else setAdminMessage('비밀번호를 확인해 주세요.');}
  async function loadAdmin(){const [lr,sr]=await Promise.all([fetch('/api/admin/letters'),fetch('/api/admin/settings')]);if(lr.ok){const d=await lr.json();setAdminLetters(d.letters||[]);}if(sr.ok){const d=await sr.json();setPublishInput(d.settings.publish_at?new Date(d.settings.publish_at).toISOString().slice(0,16):'');}}
  async function saveSchedule(){const r=await fetch('/api/admin/settings',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({publish_at:publishInput?new Date(publishInput).toISOString():null})});const d=await r.json().catch(()=>({}));setAdminMessage(r.ok?'공개 예약을 저장했어요.':(d.error||'저장에 실패했어요.'));}
