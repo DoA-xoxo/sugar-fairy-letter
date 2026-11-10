@@ -223,3 +223,19 @@
 .letter-modal .modal-ribbon {
   transform: translateY(16px);
 }
+
+
+/* 모바일에서는 전체 편지 다운로드 버튼을 편지 목록 아래에 표시 */
+.mobile-download-wrap { display: none; }
+@media (max-width: 760px) {
+  .desktop-download-all { display: none !important; }
+  .mobile-download-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 24px;
+  }
+  .mobile-download-wrap .download-all {
+    width: 100%;
+    max-width: 340px;
+  }
+}
