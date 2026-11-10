@@ -162,3 +162,7 @@
 @media(max-width:430px){
   .status-row{padding-bottom:15px}
 }
+
+
+/* Tighten the line spacing in the letter-writing field by about one third */
+.write-panel textarea{line-height:1.27}
