@@ -306,3 +306,41 @@
     padding-top: 104px !important;
   }
 }
+
+
+/* 편지지: 모서리와 상·하단 장식은 고정하고 중앙의 직선 테두리 구간만 세로 확장 */
+.write-panel,
+.modal-paper {
+  border-style: solid;
+  border-width: 58px 44px 58px;
+  border-image-source: url('/assets/letter-paper-flex.png');
+  border-image-slice: 12% 12% 12% 12% fill;
+  border-image-width: 58px 44px 58px;
+  border-image-repeat: stretch stretch;
+  background: transparent;
+}
+
+.write-panel {
+  padding: 24px 20px 28px;
+}
+
+.modal-paper {
+  padding: 18px 14px 20px;
+}
+
+@media (max-width: 760px) {
+  .write-panel,
+  .modal-paper {
+    border-width: 48px 36px 48px;
+    border-image-width: 48px 36px 48px;
+    border-image-slice: 12% 12% 12% 12% fill;
+  }
+
+  .write-panel {
+    padding: 18px 14px 22px;
+  }
+
+  .modal-paper {
+    padding: 14px 10px 16px;
+  }
+}
