@@ -345,3 +345,27 @@
     padding: 14px 14px 16px;
   }
 }
+
+
+/* 공개된 실제 편지 카드에도 작성 페이지와 동일한 9분할 편지지 적용 */
+.letter-card {
+  border: 58px solid transparent;
+  border-width: 58px 44px;
+  border-image-source: url('/assets/letter-paper-flex.png');
+  border-image-slice: 12% 12% 12% 12% fill;
+  border-image-width: 58px 44px;
+  border-image-repeat: stretch stretch;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  padding: 24px 20px 28px;
+}
+
+@media (max-width: 760px) {
+  .letter-card {
+    border-width: 48px 36px;
+    border-image-width: 48px 36px;
+    border-image-slice: 12% 12% 12% 12% fill;
+    padding: 18px 14px 22px;
+  }
+}
