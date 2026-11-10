@@ -20,3 +20,15 @@
  .hero-ribbon{width:225px;height:90px;bottom:-43px}
  .status-row{padding-top:27px}
 }
+
+/* Larger sweeping divider ribbon and smaller handwritten introduction */
+.hero-ribbon{width:min(620px,76vw);height:170px;bottom:-78px}
+.intro{font-size:22px}
+@media(max-width:760px){
+ .hero-ribbon{width:min(500px,88vw);height:138px;bottom:-64px}
+ .intro{font-size:19px}
+}
+@media(max-width:430px){
+ .hero-ribbon{width:94vw;height:116px;bottom:-54px}
+ .intro{font-size:18px}
+}
