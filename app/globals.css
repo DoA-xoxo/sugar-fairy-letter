@@ -166,3 +166,36 @@
 
 /* Tighten the line spacing in the letter-writing field by about one third */
 .write-panel textarea{line-height:1.27}
+
+
+/* 편지 상세 모달: 위아래 장식 제거, 리본 확대 및 편지지에 밀착 */
+.letter-modal::before,
+.letter-modal::after {
+  display: none !important;
+  content: none !important;
+}
+
+.modal-ribbon {
+  width: min(340px, 88%);
+  max-height: 108px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 0;
+}
+
+.modal-paper {
+  margin-top: 0;
+  padding-top: 38px;
+}
+
+@media (max-width: 760px) {
+  .modal-ribbon {
+    width: min(310px, 92%);
+    max-height: 96px;
+    margin-bottom: 0;
+  }
+
+  .modal-paper {
+    padding-top: 32px;
+  }
+}
