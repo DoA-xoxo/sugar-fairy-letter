@@ -24,7 +24,7 @@ export async function PATCH(request){
   const {error}=await db.from('site_settings').update(patch).eq('id',1);
   if(error) return NextResponse.json({error:'설정을 저장하지 못했습니다.'},{status:500});
   if(is_published!==undefined){
-    const {error:letterError}=await db.from('letters').update({is_public:Boolean(is_published)}).neq('id','');
+    const {error:letterError}=await db.from('letters').update({is_public:Boolean(is_published)});
     if(letterError) return NextResponse.json({error:'편지 공개 상태를 변경하지 못했습니다.'},{status:500});
   }
   return NextResponse.json({ok:true});
