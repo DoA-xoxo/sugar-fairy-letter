@@ -134,3 +134,9 @@
     bottom:-50px;
   }
 }
+
+
+/* Increase the letter-writing text size by 1.5x */
+.write-panel textarea{
+  font-size:21px;
+}
