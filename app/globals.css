@@ -250,3 +250,44 @@
   width: min(100%, 760px);
   margin: 0 auto;
 }
+
+
+/* 비공개 안내와 편지 작성지를 같은 폭으로 중앙 정렬 */
+.status-row {
+  width: min(100%, 760px);
+  min-height: 58px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.status-label {
+  justify-content: center;
+  text-align: center;
+}
+
+.private-layout {
+  width: min(100%, 760px);
+  margin: 0 auto;
+}
+
+.write-panel {
+  width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .status-row {
+    width: 100%;
+    padding: 20px 0 16px;
+    align-items: center;
+  }
+
+  .status-label {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .private-layout {
+    width: 100%;
+  }
+}
