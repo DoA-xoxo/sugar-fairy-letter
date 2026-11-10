@@ -355,7 +355,8 @@
   border-image-slice: 175 68 180 68 fill;
   border-image-width: 88px 34px 90px;
   border-image-repeat: stretch;
-  background: transparent;
+  background-color: transparent;
+  background-image: none;
 }
 
 /* 기존 카드 안쪽 여백과 텍스트 배치는 그대로 유지 */
