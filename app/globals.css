@@ -115,3 +115,22 @@
 @media(max-width:430px){
   .status-row{padding-top:84px}
 }
+
+
+/* Mobile hero balance: add air above the intro and bring the ribbon closer */
+@media(max-width:760px){
+  .intro{
+    margin-top:14px;
+  }
+  .hero-ribbon{
+    bottom:-58px;
+  }
+}
+@media(max-width:430px){
+  .intro{
+    margin-top:13px;
+  }
+  .hero-ribbon{
+    bottom:-50px;
+  }
+}
