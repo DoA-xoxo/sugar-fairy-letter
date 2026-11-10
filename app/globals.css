@@ -199,3 +199,21 @@
     padding-top: 32px;
   }
 }
+
+
+/* 리본이 편지지 상단 테두리를 살짝 가로지르도록 배치 */
+.letter-modal .modal-ribbon {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto -14px;
+}
+
+.letter-modal .modal-paper {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 760px) {
+  .letter-modal .modal-ribbon {
+    margin-bottom: -12px;
+  }
+}
