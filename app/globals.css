@@ -347,22 +347,14 @@
 }
 
 
-/* 공개 편지 카드: 원본 장식 프레임은 9분할로 보존하고 좌우 직선 테두리만 세로 확장 */
+/* 공개 편지 카드: 원본 여백은 유지하고 테두리 조각은 늘이지 않고 반복 배치 */
 .letter-card {
   border: 0 solid transparent;
   border-width: 88px 34px 90px;
   border-image-source: url('/assets/letter-paper.png');
   border-image-slice: 175 68 180 68 fill;
   border-image-width: 88px 34px 90px;
-  border-image-repeat: stretch;
+  border-image-repeat: round round;
   background-color: transparent;
   background-image: none;
-}
-
-/* 기존 카드 안쪽 여백과 텍스트 배치는 그대로 유지 */
-@media (max-width: 760px) {
-  .letter-card {
-    border-width: 88px 34px 90px;
-    border-image-width: 88px 34px 90px;
-  }
 }
