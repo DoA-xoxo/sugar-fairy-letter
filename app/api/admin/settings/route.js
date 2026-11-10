@@ -11,21 +11,28 @@ export async function GET(){
 
 export async function PATCH(request){
   if(!(await isAdmin())) return NextResponse.json({error:'인증이 필요합니다.'},{status:401});
-  const body=await request.json();
-  const {publish_at,is_published}=body;
-  const patch={};
-  if(publish_at!==undefined) patch.publish_at=publish_at;
-  if(is_published!==undefined){
-    patch.is_published=Boolean(is_published);
-    // 비공개로 되돌릴 때 과거 공개 예약이 다시 실행되지 않도록 예약도 초기화
-    if(is_published===false) patch.publish_at=null;
+  try {
+    const body=await request.json();
+    const {publish_at,is_published}=body;
+    const patch={};
+    if(publish_at!==undefined) patch.publish_at=publish_at;
+    if(is_published!==undefined){
+      patch.is_published=Boolean(is_published);
+      if(is_published===false) patch.publish_at=null;
+    }
+    if(!Object.keys(patch).length) return NextResponse.json({error:'변경할 설정이 없습니다.'},{status:400});
+
+    const db=supabaseAdmin();
+    const {data:settings,error:settingsError}=await db.from('site_settings').update(patch).eq('id',1).select('id').maybeSingle();
+    if(settingsError) return NextResponse.json({error:'사이트 공개 설정을 저장하지 못했습니다.'},{status:500});
+    if(!settings) return NextResponse.json({error:'사이트 설정(id=1)을 찾을 수 없습니다. Supabase site_settings 테이블을 확인해 주세요.'},{status:404});
+
+    if(is_published!==undefined){
+      const {error:letterError}=await db.from('letters').update({is_public:Boolean(is_published)});
+      if(letterError) return NextResponse.json({error:'사이트 설정은 변경했지만 편지 공개 상태를 변경하지 못했습니다.'},{status:500});
+    }
+    return NextResponse.json({ok:true});
+  } catch {
+    return NextResponse.json({error:'요청을 처리하지 못했습니다.'},{status:500});
   }
-  const db=supabaseAdmin();
-  const {error}=await db.from('site_settings').update(patch).eq('id',1);
-  if(error) return NextResponse.json({error:'설정을 저장하지 못했습니다.'},{status:500});
-  if(is_published!==undefined){
-    const {error:letterError}=await db.from('letters').update({is_public:Boolean(is_published)});
-    if(letterError) return NextResponse.json({error:'편지 공개 상태를 변경하지 못했습니다.'},{status:500});
-  }
-  return NextResponse.json({ok:true});
 }
