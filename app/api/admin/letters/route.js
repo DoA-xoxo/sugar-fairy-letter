@@ -20,8 +20,13 @@ export async function PATCH(request){
   }
   if(is_public!==undefined) patch.is_public=Boolean(is_public);
   if(!Object.keys(patch).length) return NextResponse.json({error:'변경할 내용이 없습니다.'},{status:400});
-  const {error}=await supabaseAdmin().from('letters').update(patch).eq('id',id);
+  const db=supabaseAdmin();
+  const {error}=await db.from('letters').update(patch).eq('id',id);
   if(error) return NextResponse.json({error:'편지를 수정하지 못했습니다.'},{status:500});
+  if(is_public===true){
+    const {error:settingsError}=await db.from('site_settings').update({is_published:true}).eq('id',1);
+    if(settingsError) return NextResponse.json({error:'공개 상태를 저장하지 못했습니다.'},{status:500});
+  }
   return NextResponse.json({ok:true});
 }
 export async function DELETE(request){
