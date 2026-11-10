@@ -239,3 +239,14 @@
     max-width: 340px;
   }
 }
+
+
+/* 비공개 화면에서는 편지 작성 영역만 표시 */
+.private-layout {
+  display: block;
+}
+
+.write-panel {
+  width: min(100%, 760px);
+  margin: 0 auto;
+}
