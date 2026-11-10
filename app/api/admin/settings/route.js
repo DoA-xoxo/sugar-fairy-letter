@@ -1,0 +1,5 @@
+import { NextResponse } from 'next/server';
+import { isAdmin } from '@/lib/admin';
+import { supabaseAdmin } from '@/lib/supabase';
+export async function GET(){if(!(await isAdmin()))return NextResponse.json({error:'인증이 필요합니다.'},{status:401});const {data,error}=await supabaseAdmin().from('site_settings').select('*').eq('id',1).single();if(error)return NextResponse.json({error:'설정을 불러오지 못했습니다.'},{status:500});return NextResponse.json({settings:data});}
+export async function PATCH(request){if(!(await isAdmin()))return NextResponse.json({error:'인증이 필요합니다.'},{status:401});const {publish_at,is_published}=await request.json();const patch={};if(publish_at!==undefined)patch.publish_at=publish_at;if(is_published!==undefined)patch.is_published=Boolean(is_published);const db=supabaseAdmin();const {error}=await db.from('site_settings').update(patch).eq('id',1);if(!error&&is_published===true){const {error:e}=await db.from('letters').update({is_public:true}).eq('is_public',false);if(e)return NextResponse.json({error:'편지 공개 처리에 실패했습니다.'},{status:500});}if(error)return NextResponse.json({error:'설정을 저장하지 못했습니다.'},{status:500});return NextResponse.json({ok:true});}
