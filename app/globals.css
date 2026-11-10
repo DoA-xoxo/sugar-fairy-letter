@@ -217,3 +217,9 @@
     margin-bottom: -12px;
   }
 }
+
+
+/* 리본 매듭이 편지지 상단 테두리에 닿도록 한 단계 더 아래로 */
+.letter-modal .modal-ribbon {
+  transform: translateY(16px);
+}
