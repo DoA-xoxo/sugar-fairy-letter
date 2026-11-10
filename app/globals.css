@@ -32,3 +32,22 @@
  .hero-ribbon{width:94vw;height:116px;bottom:-54px}
  .intro{font-size:18px}
 }
+
+
+/* Uploaded Ongleap handwriting fonts */
+@font-face{
+  font-family:'JuriHand';
+  src:url('/fonts/juri-hand.woff2') format('woff2');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face{
+  font-family:'MinhyeHand';
+  src:url('/fonts/minhye.woff2') format('woff2');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+/* Use Juri's handwritten letter style only for the fairy introduction */
+.intro{font-family:'JuriHand','Nanum Pen Script','Noto Serif KR',serif}
