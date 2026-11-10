@@ -296,14 +296,14 @@
 /* 모바일에서 상단 리본과 비공개 안내 문구 사이 간격 확보 */
 @media (max-width: 760px) {
   .status-row {
-    padding-top: 92px !important;
+    padding-top: 46px !important;
     padding-bottom: 16px !important;
   }
 }
 
 @media (max-width: 430px) {
   .status-row {
-    padding-top: 104px !important;
+    padding-top: 52px !important;
   }
 }
 
