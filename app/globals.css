@@ -344,25 +344,3 @@
     padding: 14px 10px 16px;
   }
 }
-
-
-/* 공개된 편지 카드도 편지지 9-slice 적용: 모서리/상하 장식 고정, 좌우 직선만 세로 확장 */
-.letter-card {
-  background-image: none !important;
-  background-color: transparent;
-  border: 52px solid transparent !important;
-  border-image-source: url('/assets/letter-paper-flex.png');
-  border-image-slice: 52 40 52 40 fill;
-  border-image-width: 52px 40px 52px;
-  border-image-repeat: stretch stretch;
-  padding: 8px 4px 10px;
-  min-height: 205px;
-}
-@media (max-width: 760px) {
-  .letter-card {
-    border-width: 48px 36px !important;
-    border-image-width: 48px 36px;
-    border-image-slice: 52 40 52 40 fill;
-    padding: 6px 2px 8px;
-  }
-}
