@@ -151,3 +151,14 @@
   .hero-ribbon{bottom:-68px}
   .intro{margin-top:13px}
 }
+
+
+/* Small breathing room below the privacy status and a comfortable writing size */
+.status-row{padding-bottom:18px}
+.write-panel textarea{font-size:17px}
+@media(max-width:760px){
+  .status-row{padding-bottom:16px}
+}
+@media(max-width:430px){
+  .status-row{padding-bottom:15px}
+}
