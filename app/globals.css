@@ -140,3 +140,14 @@
 .write-panel textarea{
   font-size:21px;
 }
+
+
+/* Keep the mobile ribbon at its previous position; move only the intro text down */
+@media(max-width:760px){
+  .hero-ribbon{bottom:-80px}
+  .intro{margin-top:14px}
+}
+@media(max-width:430px){
+  .hero-ribbon{bottom:-68px}
+  .intro{margin-top:13px}
+}
