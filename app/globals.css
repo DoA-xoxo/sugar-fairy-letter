@@ -346,4 +346,9 @@
   }
 }
 
-
+.letter-card {
+  --slice-top: 175px;
+  --slice-bottom: 180px;
+  --slice-left: 68px;
+  --slice-right: 68px;
+}
